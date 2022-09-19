@@ -12,6 +12,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Trader<T> {
@@ -40,8 +41,11 @@ public class Trader<T> {
      *       empty ArrayLists for their inventory and wishlist.
      */
 
-
-
+    public Trader(int money){
+        this.money = money;
+        this.inventory = new ArrayList<T>();
+        this.wishlist = new ArrayList<T>();
+    }
 
 
     /* TODO: Implement the method addToWishlist that takes an
@@ -49,7 +53,9 @@ public class Trader<T> {
      */
 
 
-
+    public void addToWishlist(T toAdd){
+        this.wishlist.add(toAdd);
+    }
 
 
     /* TODO: Implement the method getSellingPrice that takes an
@@ -59,8 +65,14 @@ public class Trader<T> {
      *
      *       We will call this in exchangeMoney().
      */
-
-
+    public int getSellingPrice(T object){
+        if(object instanceof Tradable){
+            return ((Tradable) object).getPrice();
+        }
+        else {
+            return Tradable.MISSING_PRICE;
+        }
+    }
 
 
 
